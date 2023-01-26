@@ -95,12 +95,14 @@ const Home = () => {
     try {
       const tx = await talentLayerID.mint(platformId, handle);
       await tx.wait();
+
+      setHandle("");
+      getProfile();
     } catch (error: any) {
       setError(error.message);
     }
 
     setLoading(false);
-    getProfile();
   };
 
   return (
