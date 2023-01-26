@@ -10,7 +10,7 @@ import { TalentLayerIdAbi } from "../abis/talent-layer-id";
 // Address of Open GSN Paymaster, deployed on Mumbai Testnet: https://docs-v2.opengsn.org/networks/polygon/mumbai.html#mumbai-testnet
 const paymasterAddress = "0xcA94aBEdcC18A10521aB7273B3F3D5ED28Cf7B8A";
 
-const talentLayerIdAddress = "0x71D9Cd16232681fa3Ee6AC88ED5859C9478c60Db";
+const talentLayerIdAddress = "0x20c1Dec4ca935c5848B0F8Ea963713d8F3594c02";
 
 interface Profile {
   id: number;
