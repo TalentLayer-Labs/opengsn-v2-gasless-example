@@ -133,7 +133,7 @@ const Home = () => {
                 onChange={(e) => setHandle(e.target.value)}
               />
               <button
-                disabled={loading}
+                disabled={loading || !handle}
                 className={styles.button}
                 onClick={onMint}
               >
