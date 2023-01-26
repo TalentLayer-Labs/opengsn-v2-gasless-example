@@ -28,6 +28,8 @@ const Home = () => {
 
   useEffect(() => {
     const getContract = async () => {
+      if (!window.ethereum) return;
+
       const gsnConfig: Partial<GSNConfig> = {
         loggerConfiguration: { logLevel: "debug" },
         paymasterAddress,
@@ -36,7 +38,7 @@ const Home = () => {
       };
 
       const gsnProvider = RelayProvider.newProvider({
-        provider: window.ethereum,
+        provider: window.ethereum as any,
         config: gsnConfig,
       });
       await gsnProvider.init();
