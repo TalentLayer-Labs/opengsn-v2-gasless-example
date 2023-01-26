@@ -108,6 +108,10 @@ const Home = () => {
         {profile ? (
           <div className={styles.details}>
             <p>
+              You already have a TalentLayer ID! Use another address to mint a
+              new TalentLayer ID without paying for gas!
+            </p>
+            <p>
               <b>Your TalentLayer Id: </b>
               {profile.id}
             </p>
