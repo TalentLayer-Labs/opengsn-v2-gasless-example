@@ -59,6 +59,9 @@
   margin: 0 0 1rem 0;
   padding: 1rem 1.4rem;
   width: 100%;
+  max-width: 24rem;
+  display: block;
+  margin: 0 auto;
 }
 
 .spinner {
@@ -81,4 +84,16 @@
   margin: 0 0 1rem 0;
   max-width: 40rem;
   margin-top: 2rem;
+}
+
+.message {
+  max-width: 40rem;
+}
+
+.link {
+  color: #0070f3;
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
 }

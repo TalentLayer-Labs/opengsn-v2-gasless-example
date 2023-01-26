@@ -114,9 +114,9 @@ const Home = () => {
 
         {profile ? (
           <div className={styles.details}>
-            <p>
+            <p className={styles.message}>
               You already have a TalentLayer ID! Use another address to mint a
-              new TalentLayer ID without paying for gas!
+              new TalentLayer ID without paying for gas fees!
             </p>
             <p>
               <b>Your TalentLayer Id: </b>
@@ -129,7 +129,20 @@ const Home = () => {
           </div>
         ) : (
           <div>
-            <p>Mint your TalentLayer ID without paying gas fees!</p>
+            <p className={styles.message}>
+              Mint your TalentLayer ID without paying gas fees! You will be
+              asked to sign a meta-transaction and an Open GSN relayer will
+              submit the transaction to the blockchain for you, paying for the
+              gas fees. Learn more{" "}
+              <a
+                href="https://docs.opengsn.org/"
+                className={styles.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                here
+              </a>
+            </p>
 
             <div>
               <input
