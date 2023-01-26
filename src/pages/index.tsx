@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GSNConfig, RelayProvider } from "@opengsn/provider";
 import { TalentLayerIdAbi } from "../abis/talent-layer-id";
 
@@ -57,34 +57,36 @@ const Home = () => {
     getContract();
   }, []);
 
-  useEffect(() => {
+  const getProfile = useCallback(async () => {
     if (!talentLayerID || !address) return;
 
-    const getProfile = async () => {
-      const tlId = await talentLayerID.walletOfOwner(address);
-      if (tlId.toNumber() === 0) {
-        setProfile(null);
-        return;
-      }
+    const tlId = await talentLayerID.walletOfOwner(address);
+    if (tlId.toNumber() === 0) {
+      setProfile(null);
+      return;
+    }
 
-      const profile = await talentLayerID.profiles(tlId);
+    const profile = await talentLayerID.profiles(tlId);
 
-      setProfile({
-        id: tlId.toNumber(),
-        handle: profile.handle,
-      });
-    };
-
-    getProfile();
+    setProfile({
+      id: tlId.toNumber(),
+      handle: profile.handle,
+    });
   }, [talentLayerID, address]);
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
 
   const onMint = async () => {
     if (!talentLayerID) return;
 
-    const tx = await talentLayerID.mint(1, "qwerty", {
+    const tx = await talentLayerID.mint(1, "uiop", {
       value: ethers.utils.parseEther("0"),
     });
     await tx.wait();
+
+    getProfile();
   };
 
   return (
