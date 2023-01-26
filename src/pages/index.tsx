@@ -91,6 +91,7 @@ const Home = () => {
   const onMint = async () => {
     if (!talentLayerID) return;
     setLoading(true);
+    setError("");
 
     try {
       const tx = await talentLayerID.mint(platformId, handle);
