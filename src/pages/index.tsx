@@ -11,6 +11,7 @@ import { TalentLayerIdAbi } from "../abis/talent-layer-id";
 const paymasterAddress = "0xcA94aBEdcC18A10521aB7273B3F3D5ED28Cf7B8A";
 
 const talentLayerIdAddress = "0x20c1Dec4ca935c5848B0F8Ea963713d8F3594c02";
+const platformId = 1;
 
 interface Profile {
   id: number;
@@ -21,11 +22,15 @@ const Home = () => {
   const { address } = useAccount();
 
   const [profile, setProfile] = useState<Profile | null>();
+  const [handle, setHandle] = useState("");
 
   const [talentLayerID, setTalentLayerID] = useState<ethers.Contract | null>(
     null
   );
 
+  /**
+   * Setup TalentLayerID contract using Open GSN provider
+   */
   useEffect(() => {
     const getContract = async () => {
       if (!window.ethereum) return;
@@ -57,6 +62,9 @@ const Home = () => {
     getContract();
   }, []);
 
+  /**
+   * Get TalentLayer profile data for the connected wallet
+   */
   const getProfile = useCallback(async () => {
     if (!talentLayerID || !address) return;
 
@@ -81,9 +89,7 @@ const Home = () => {
   const onMint = async () => {
     if (!talentLayerID) return;
 
-    const tx = await talentLayerID.mint(1, "uiop", {
-      value: ethers.utils.parseEther("0"),
-    });
+    const tx = await talentLayerID.mint(platformId, handle);
     await tx.wait();
 
     getProfile();
@@ -110,9 +116,19 @@ const Home = () => {
         ) : (
           <div>
             <p>Mint your TalentLayer ID without paying gas fees!</p>
-            <button className={styles.button} onClick={onMint}>
-              Mint
-            </button>
+
+            <div>
+              <input
+                type="text"
+                placeholder="Choose your handle"
+                className={styles.input}
+                value={handle}
+                onChange={(e) => setHandle(e.target.value)}
+              />
+              <button className={styles.button} onClick={onMint}>
+                Mint
+              </button>
+            </div>
           </div>
         )}
       </main>

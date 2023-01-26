@@ -45,3 +45,12 @@
   background-color: #0060d6;
   border-color: #0060d6;
 }
+
+.input {
+  border: 1px solid #dadada;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  margin: 0 0 1rem 0;
+  padding: 1rem 1.4rem;
+  width: 100%;
+}
