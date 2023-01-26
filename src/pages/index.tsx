@@ -24,6 +24,7 @@ const Home = () => {
   const [profile, setProfile] = useState<Profile | null>();
   const [handle, setHandle] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [talentLayerID, setTalentLayerID] = useState<ethers.Contract | null>(
     null
@@ -91,8 +92,12 @@ const Home = () => {
     if (!talentLayerID) return;
     setLoading(true);
 
-    const tx = await talentLayerID.mint(platformId, handle);
-    await tx.wait();
+    try {
+      const tx = await talentLayerID.mint(platformId, handle);
+      await tx.wait();
+    } catch (error: any) {
+      setError(error.message);
+    }
 
     setLoading(false);
     getProfile();
@@ -158,6 +163,8 @@ const Home = () => {
             </div>
           </div>
         )}
+
+        {error && <p className={styles.error}>{error}</p>}
       </main>
     </div>
   );
